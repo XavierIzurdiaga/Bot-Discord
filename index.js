@@ -1,5 +1,6 @@
 const { Client, Intents } = require('discord.js');
-const { token, prefix } = require('./config.json');
+// const { token, prefix } = require('./config.json');
+const prefix = process.env.prefix;
 const ytdl = require('ytdl-core');
 
 //COMANDOS
@@ -113,4 +114,4 @@ function leerMensaje(mensaje) {
     }
 }
 
-client.login(token);
+client.login(process.env.token);
