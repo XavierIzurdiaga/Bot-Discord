@@ -38,8 +38,20 @@ function leerMensaje(mensaje) {
     // COMANDO PARA MOSTRAR LA AYUDA
 
     if (comando == `${prefix}help`) {
+        //ACTUALIZAR
+        let ayuda = "-----MÚSICA-----";
+        ayuda += "\n\n!mp 'LINK'";
+        ayuda += "\n!mr 1";
+        ayuda += "\n!mq";
+        ayuda += "\n\n-----ADMINISTRACIÓN-----";
+        ayuda += "\n\n!ar add MOD @Xavierizur";
+        ayuda += "\n!ar rem MOD @Xavierizur";
+        ayuda += "\n!ac add txt general";
+        ayuda += "\n!ac add voz general";
+        ayuda += "\n!ac rem #general";
         mensaje.reply({
-            content: "-----MÚSICA-----\n\n!mp dakiti \n!mp (URL) \n!mr 1 \n!mq\n\n-----ADMINISTRACIÓN-----\n\n!ar add MOD @Xavierizur\n!ac add text #general"
+            content: ayuda
+
         })
         return;
     }
@@ -69,7 +81,6 @@ function leerMensaje(mensaje) {
     }
 
     // COMANDOS PARA ADMINISTRACIÓN
-
     if (comando.substring(0,7) == `${prefix}ar add`) {
         mensaje.reply({
             content: "Añadir roles"
