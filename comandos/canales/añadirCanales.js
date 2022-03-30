@@ -1,6 +1,13 @@
 module.exports = {añadirCanales};
 
 function añadirCanales(mensaje){
+    let mod = mensaje.guild.roles.cache.find(role => role.name === "MOD");
+    if (!mensaje.member.roles.cache.has(mod.id)) {
+        mensaje.reply({
+            content: "No tienes los roles necesarios para ejectuar este comando"
+        })
+        return
+    }
     try {
         let comando = String(mensaje.content);
         let parametros = comando.split(" ");
