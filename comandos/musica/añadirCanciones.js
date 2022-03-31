@@ -1,55 +1,45 @@
 module.exports = {AñadirCancion};
 
 const ytdl = require('ytdl-core');
-
-// TODO : Acabar parte audio
-// const { createAudioResource,createAudioPlayer, NoSubscriberBehavior  } = require('@discordjs/voice');
-
-// const player = createAudioPlayer({
-// 	behaviors: {
-// 		noSubscriber: NoSubscriberBehavior.Pause,
-// 	},
-// });
-
-// const resource = createAudioResource('EVERYBODY PUT YOUR HANDS IN THE AIR.mp3', {
-// 	metadata: {
-// 		title: 'A good audio',
-// 	},
-// });
-
-// const { joinVoiceChannel } = require('@discordjs/voice');
+const {
+	AudioPlayerStatus,
+	StreamType,
+	createAudioPlayer,
+	createAudioResource,
+	joinVoiceChannel,
+} = require('@discordjs/voice');
 
 async function AñadirCancion(mensaje) {
     try {
-        let channel = mensaje.member.voice.channel;
-
         let comando = String(mensaje.content);
-        if (comando.indexOf(" ") >= 0) {
-            let UrlCancion = comando.split(" ")[1];
-            let InfoCancion = await ytdl.getInfo(UrlCancion);
-            let cancion = {
+        let UrlCancion = comando.split(" ")[1];
+
+        let canal = mensaje.member.voice.channel;
+
+        let conexion = joinVoiceChannel({
+            channelId: canal.id,
+            guildId: mensaje.guild.id,
+            adapterCreator: mensaje.guild.voiceAdapterCreator,
+        });
+
+        let InfoCancion = await ytdl.getInfo(UrlCancion);
+        let cancion = {
                 title: InfoCancion.videoDetails.title,
                 url: InfoCancion.videoDetails.video_url,
             };
 
-            mensaje.reply({
-                content:`${cancion.title} Ha sido añadida a la lista`
-            })
-        }
-        
+        mensaje.reply({
+            content:`${cancion.title} Ha sido añadida a la lista`
+        })
 
-        let connection = await joinVoiceChannel({
-            channelId: channel.id,
-            guildId: channel.guild.id,
-            adapterCreator: channel.guild.voiceAdapterCreator,
-        });
+        let stream = ytdl(cancion.url, { filter: 'audioonly' });
+        let resource = createAudioResource(stream, { inputType: StreamType.Arbitrary });
+        let player = createAudioPlayer();
 
-        
-        
-        setTimeout(() => {
-            // player.play(resource);
-            connection.destroy();
-        }, 1500);
+        player.play(resource);
+        conexion.subscribe(player);
+
+        player.on(AudioPlayerStatus.Idle, () => conexion.destroy());
     }catch (error) {
         mensaje.reply({
             content: "Comando introducido incorrectamente, para saber como usarlo correctamente escriba !help    " 
