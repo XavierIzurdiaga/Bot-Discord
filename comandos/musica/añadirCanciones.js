@@ -1,5 +1,7 @@
 module.exports = {AñadirCancion};
 
+const ytdl = require('ytdl-core');
+
 // TODO : Acabar parte audio
 // const { createAudioResource,createAudioPlayer, NoSubscriberBehavior  } = require('@discordjs/voice');
 
@@ -18,33 +20,40 @@ module.exports = {AñadirCancion};
 // const { joinVoiceChannel } = require('@discordjs/voice');
 
 async function AñadirCancion(mensaje) {
-    let channel = mensaje.member.voice.channel;
+    try {
+        let channel = mensaje.member.voice.channel;
 
-    let comando = String(mensaje.content);
-    if (comando.indexOf(" ") >= 0) {
-        let UrlCancion = comando.split(" ")[1];
-        let InfoCancion = await ytdl.getInfo(UrlCancion);
-        let cancion = {
-            title: InfoCancion.videoDetails.title,
-            url: InfoCancion.videoDetails.video_url,
-        };
+        let comando = String(mensaje.content);
+        if (comando.indexOf(" ") >= 0) {
+            let UrlCancion = comando.split(" ")[1];
+            let InfoCancion = await ytdl.getInfo(UrlCancion);
+            let cancion = {
+                title: InfoCancion.videoDetails.title,
+                url: InfoCancion.videoDetails.video_url,
+            };
 
+            mensaje.reply({
+                content:`${cancion.title} Ha sido añadida a la lista`
+            })
+        }
+        
+
+        let connection = await joinVoiceChannel({
+            channelId: channel.id,
+            guildId: channel.guild.id,
+            adapterCreator: channel.guild.voiceAdapterCreator,
+        });
+
+        
+        
+        setTimeout(() => {
+            // player.play(resource);
+            connection.destroy();
+        }, 1500);
+    }catch (error) {
         mensaje.reply({
-            content:`${cancion.title} Ha sido añadida a la lista`
+            content: "Comando introducido incorrectamente, para saber como usarlo correctamente escriba !help    " 
         })
+        console.log(error);
     }
-    
-
-    let connection = await joinVoiceChannel({
-        channelId: channel.id,
-        guildId: channel.guild.id,
-        adapterCreator: channel.guild.voiceAdapterCreator,
-    });
-
-    
-    
-    setTimeout(() => {
-        // player.play(resource);
-        connection.destroy();
-    }, 1500);
 }

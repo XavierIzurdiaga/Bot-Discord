@@ -1,7 +1,5 @@
 const { Client, Intents } = require('discord.js');
-// const { token, prefix } = require('./config.json');
 const prefix = process.env.prefix;
-const ytdl = require('ytdl-core');
 
 //COMANDOS
 // ROLES
@@ -28,8 +26,13 @@ client.on('ready', () => {
 })
 
 client.on('messageCreate', (mensaje) =>{
-    if (!mensaje.author.bot && mensaje.content.startsWith(prefix)) {
-        leerMensaje(mensaje);
+    try {
+        if (!mensaje.author.bot && mensaje.content.startsWith(prefix)) {
+            leerMensaje(mensaje);
+        }
+        
+    } catch (error) {
+        console.log("Algo ha salido mal");
     }
 })
 
