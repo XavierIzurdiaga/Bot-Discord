@@ -6,12 +6,16 @@
     "start": "node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node" : "16.14.0",
+    "npm" : "8.3.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Xizurdigar/Hamalasaba.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Xavier Izurdiaga",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Xizurdigar/Hamalasaba/issues"
