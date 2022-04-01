@@ -1,5 +1,6 @@
 const { Client, Intents } = require('discord.js');
 const { token, prefix } = require('./config.json');
+const {createAudioPlayer} = require('@discordjs/voice');
 
 //COMANDOS
 // ROLES
@@ -9,7 +10,8 @@ const { quitarRoles } = require('./comandos/roles/quitarRoles');
 const { añadirCanales } = require('./comandos/canales/añadirCanales');
 const { quitarCanales } = require('./comandos/canales/quitarCanales');
 //MUSICA
-const { AñadirCancion } = require('./comandos/musica/añadirCanciones');
+const { añadirCancion } = require('./comandos/musica/añadirCanciones');
+const { saltarCancion } = require('./comandos/musica/saltarCancion');
 
 
 const client = new Client({
@@ -20,6 +22,10 @@ const client = new Client({
         Intents.FLAGS.GUILD_VOICE_STATES
     ]
 });
+
+// VARIABLES PARA MUSICA
+var canciones = [];
+const player = createAudioPlayer();
 
 client.on('ready', () => {
     console.log('El bot esta listo');
@@ -45,6 +51,7 @@ function leerMensaje(mensaje) {
         //ACTUALIZAR
         let ayuda = "-----MÚSICA-----";
         ayuda += "\n\n!mp 'LINK'";
+        ayuda += "\n!ms";
         ayuda += "\n!mr 1";
         ayuda += "\n!mq";
         ayuda += "\n\n-----ADMINISTRACIÓN-----";
@@ -66,7 +73,15 @@ function leerMensaje(mensaje) {
         mensaje.reply({
             content: "Añadir cancion"
         })
-        AñadirCancion(mensaje);
+        añadirCancion(mensaje, canciones, player);
+        return;
+    }
+
+    if (comando == `${prefix}ms`) {
+        mensaje.reply({
+            content: "Saltar cancion"
+        })
+        saltarCancion(mensaje, canciones, player);
         return;
     }
 

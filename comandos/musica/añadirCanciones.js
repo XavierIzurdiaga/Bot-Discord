@@ -1,15 +1,15 @@
-module.exports = {AñadirCancion};
+module.exports = {añadirCancion};
 
+const { saltarCancion } = require('./saltarCancion');
 const ytdl = require('ytdl-core');
 const {
 	AudioPlayerStatus,
 	StreamType,
-	createAudioPlayer,
 	createAudioResource,
 	joinVoiceChannel,
 } = require('@discordjs/voice');
 
-async function AñadirCancion(mensaje) {
+async function añadirCancion(mensaje, canciones, player) {
     try {
         let comando = String(mensaje.content);
         let UrlCancion = comando.split(" ")[1];
@@ -33,13 +33,24 @@ async function AñadirCancion(mensaje) {
         })
 
         let stream = ytdl(cancion.url, { filter: 'audioonly' });
-        let resource = createAudioResource(stream, { inputType: StreamType.Arbitrary });
-        let player = createAudioPlayer();
+        let resource = createAudioResource(stream, { inputType: StreamType.Arbitrary,
+            metadata: {
+                title : cancion.title
+            }});
+        
+        canciones.push(resource);
 
-        player.play(resource);
+        player.play(canciones[0]);
         conexion.subscribe(player);
 
-        player.on(AudioPlayerStatus.Idle, () => conexion.destroy());
+        player.on(AudioPlayerStatus.Idle, () => {
+            if(canciones.length > 0){
+                if(canciones[0].ended){
+                    saltarCancion(mensaje, canciones, player);
+                }
+            }
+        });
+            
     }catch (error) {
         mensaje.reply({
             content: "Comando introducido incorrectamente, para saber como usarlo correctamente escriba !help    " 
