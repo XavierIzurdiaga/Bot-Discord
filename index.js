@@ -13,6 +13,10 @@ const { quitarCanales } = require('./comandos/canales/quitarCanales');
 const { añadirCancion } = require('./comandos/musica/añadirCanciones');
 const { saltarCancion } = require('./comandos/musica/saltarCancion');
 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`la aplicación esta siendo ejecutada en el puerto ${ PORT }`);
+});
 
 const client = new Client({
     intents:[
