@@ -12,6 +12,8 @@ const { quitarCanales } = require('./comandos/canales/quitarCanales');
 //MUSICA
 const { añadirCancion } = require('./comandos/musica/añadirCanciones');
 const { saltarCancion } = require('./comandos/musica/saltarCancion');
+const { quitarCancion } = require('./comandos/musica/quitarCancion');
+const { verCanciones } = require('./comandos/musica/verCanciones');
 
 
 const client = new Client({
@@ -89,13 +91,15 @@ function leerMensaje(mensaje) {
         mensaje.reply({
             content: "Quitar cancion"
         })
+        quitarCancion(mensaje, canciones)
         return;
     }
     
-    if (comando.substring(0,3) == `${prefix}mq`) {
+    if (comando == `${prefix}mq`) {
         mensaje.reply({
             content: "Ver canciones"
         })
+        verCanciones(mensaje, canciones)
         return;
     }
 
