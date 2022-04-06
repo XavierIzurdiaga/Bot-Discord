@@ -14,6 +14,9 @@ const { añadirCancion } = require('./comandos/musica/añadirCanciones');
 const { saltarCancion } = require('./comandos/musica/saltarCancion');
 const { quitarCancion } = require('./comandos/musica/quitarCancion');
 const { verCanciones } = require('./comandos/musica/verCanciones');
+const { desconectar } = require('./comandos/musica/desconectar');
+const { pararMusica } = require('./comandos/musica/pararMusica');
+const { continuarMusica } = require('./comandos/musica/continuarMusica');
 
 
 const client = new Client({
@@ -27,6 +30,7 @@ const client = new Client({
 
 // VARIABLES PARA MUSICA
 var canciones = [];
+var conexion = [];
 const player = createAudioPlayer();
 
 client.on('ready', () => {
@@ -56,6 +60,9 @@ function leerMensaje(mensaje) {
         ayuda += "\n!ms";
         ayuda += "\n!mr 1";
         ayuda += "\n!mq";
+        ayuda += "\n!md";
+        ayuda += "\n!mf";
+        ayuda += "\n!mc";
         ayuda += "\n\n-----ADMINISTRACIÓN-----";
         ayuda += "\n\n!ar add MOD @Xavierizur";
         ayuda += "\n!ar rem MOD @Xavierizur";
@@ -75,7 +82,7 @@ function leerMensaje(mensaje) {
         mensaje.reply({
             content: "Añadir cancion"
         })
-        añadirCancion(mensaje, canciones, player);
+        añadirCancion(mensaje, canciones, player, conexion);
         return;
     }
 
@@ -100,6 +107,30 @@ function leerMensaje(mensaje) {
             content: "Ver canciones"
         })
         verCanciones(mensaje, canciones)
+        return;
+    }
+    
+    if (comando == `${prefix}md`) {
+        mensaje.reply({
+            content: "Desconectar"
+        })
+        desconectar(mensaje, conexion)
+        return;
+    }
+
+    if (comando == `${prefix}mf`) {
+        mensaje.reply({
+            content: "Parar"
+        })
+        pararMusica(mensaje, player)
+        return;
+    }
+
+    if (comando == `${prefix}mc`) {
+        mensaje.reply({
+            content: "Continuar"
+        })
+        continuarMusica(mensaje, player)
         return;
     }
 
