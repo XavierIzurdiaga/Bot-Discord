@@ -17,6 +17,7 @@ const { verCanciones } = require('./comandos/musica/verCanciones');
 const { desconectar } = require('./comandos/musica/desconectar');
 const { pararMusica } = require('./comandos/musica/pararMusica');
 const { continuarMusica } = require('./comandos/musica/continuarMusica');
+const { escribirAyuda } = require('./comandos/help');
 
 
 const client = new Client({
@@ -55,24 +56,7 @@ function leerMensaje(mensaje) {
 
     if (comando == `${prefix}help`) {
         //ACTUALIZAR
-        let ayuda = "-----MÚSICA-----";
-        ayuda += "\n\n!mp 'LINK'";
-        ayuda += "\n!ms";
-        ayuda += "\n!mr 1";
-        ayuda += "\n!mq";
-        ayuda += "\n!md";
-        ayuda += "\n!mf";
-        ayuda += "\n!mc";
-        ayuda += "\n\n-----ADMINISTRACIÓN-----";
-        ayuda += "\n\n!ar add MOD @Xavierizur";
-        ayuda += "\n!ar rem MOD @Xavierizur";
-        ayuda += "\n!ac add txt general";
-        ayuda += "\n!ac add voz general";
-        ayuda += "\n!ac rem #general";
-        mensaje.reply({
-            content: ayuda
-
-        })
+        escribirAyuda(mensaje);
         return;
     }
 
