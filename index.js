@@ -77,7 +77,7 @@ function leerMensaje(mensaje) {
     }
 
     // COMANDOS PARA CANCIONES
-    if (comando.startsWith("m")) {
+    if (comando.startsWith("!m")) {
         if (comando.substring(0,3) == `${prefix}mp`) {
             mensaje.reply({
                 content: "Añadir cancion"
@@ -136,7 +136,7 @@ function leerMensaje(mensaje) {
     }
 
     // COMANDOS PARA ADMINISTRACIÓN
-    if (comando.startsWith("a")) {
+    if (comando.startsWith("!a")) {
         if (comando.substring(0,7) == `${prefix}ar add`) {
             mensaje.reply({
                 content: "Añadir roles"
