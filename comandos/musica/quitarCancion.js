@@ -6,7 +6,6 @@ function quitarCancion(mensaje, canciones) {
         let nCancion = comando.split(" ")[1];
         console.log(nCancion);
         if (nCancion >= 1 && nCancion <= canciones.length) {
-            console.log(canciones.length);
             let cancion = canciones[nCancion]
             canciones.splice(nCancion, 1);
 

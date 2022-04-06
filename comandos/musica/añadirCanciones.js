@@ -9,14 +9,14 @@ const {
 	joinVoiceChannel,
 } = require('@discordjs/voice');
 
-async function añadirCancion(mensaje, canciones, player) {
+async function añadirCancion(mensaje, canciones, player, conexion) {
     try {
         let comando = String(mensaje.content);
         let UrlCancion = comando.split(" ")[1];
 
         let canal = mensaje.member.voice.channel;
 
-        let conexion = joinVoiceChannel({
+        conexion[0] = joinVoiceChannel({
             channelId: canal.id,
             guildId: mensaje.guild.id,
             adapterCreator: mensaje.guild.voiceAdapterCreator,
@@ -41,7 +41,7 @@ async function añadirCancion(mensaje, canciones, player) {
         canciones.push(resource);
 
         player.play(canciones[0]);
-        conexion.subscribe(player);
+        conexion[0].subscribe(player);
 
         player.on(AudioPlayerStatus.Idle, () => {
             if(canciones.length > 0){
@@ -53,8 +53,7 @@ async function añadirCancion(mensaje, canciones, player) {
             
     }catch (error) {
         mensaje.reply({
-            content: "Comando introducido incorrectamente, para saber como usarlo correctamente escriba !help    " 
+            content: "Comando introducido incorrectamente, para saber como usarlo correctamente escriba !help" 
         })
-        console.log(error);
     }
 }
