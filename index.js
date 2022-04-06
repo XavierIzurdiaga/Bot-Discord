@@ -77,93 +77,96 @@ function leerMensaje(mensaje) {
     }
 
     // COMANDOS PARA CANCIONES
+    if (comando.startsWith("m")) {
+        if (comando.substring(0,3) == `${prefix}mp`) {
+            mensaje.reply({
+                content: "Añadir cancion"
+            })
+            añadirCancion(mensaje, canciones, player, conexion);
+            return;
+        }
 
-    if (comando.substring(0,3) == `${prefix}mp`) {
-        mensaje.reply({
-            content: "Añadir cancion"
-        })
-        añadirCancion(mensaje, canciones, player, conexion);
-        return;
-    }
+        if (comando == `${prefix}ms`) {
+            mensaje.reply({
+                content: "Saltar cancion"
+            })
+            saltarCancion(mensaje, canciones, player);
+            return;
+        }
 
-    if (comando == `${prefix}ms`) {
-        mensaje.reply({
-            content: "Saltar cancion"
-        })
-        saltarCancion(mensaje, canciones, player);
-        return;
-    }
+        if (comando.substring(0,3) == `${prefix}mr`) {
+            mensaje.reply({
+                content: "Quitar cancion"
+            })
+            quitarCancion(mensaje, canciones)
+            return;
+        }
+        
+        if (comando == `${prefix}mq`) {
+            mensaje.reply({
+                content: "Ver canciones"
+            })
+            verCanciones(mensaje, canciones)
+            return;
+        }
+        
+        if (comando == `${prefix}md`) {
+            mensaje.reply({
+                content: "Desconectar"
+            })
+            desconectar(mensaje, conexion)
+            return;
+        }
 
-    if (comando.substring(0,3) == `${prefix}mr`) {
-        mensaje.reply({
-            content: "Quitar cancion"
-        })
-        quitarCancion(mensaje, canciones)
-        return;
-    }
-    
-    if (comando == `${prefix}mq`) {
-        mensaje.reply({
-            content: "Ver canciones"
-        })
-        verCanciones(mensaje, canciones)
-        return;
-    }
-    
-    if (comando == `${prefix}md`) {
-        mensaje.reply({
-            content: "Desconectar"
-        })
-        desconectar(mensaje, conexion)
-        return;
-    }
+        if (comando == `${prefix}mf`) {
+            mensaje.reply({
+                content: "Parar"
+            })
+            pararMusica(mensaje, player)
+            return;
+        }
 
-    if (comando == `${prefix}mf`) {
-        mensaje.reply({
-            content: "Parar"
-        })
-        pararMusica(mensaje, player)
-        return;
-    }
-
-    if (comando == `${prefix}mc`) {
-        mensaje.reply({
-            content: "Continuar"
-        })
-        continuarMusica(mensaje, player)
-        return;
+        if (comando == `${prefix}mc`) {
+            mensaje.reply({
+                content: "Continuar"
+            })
+            continuarMusica(mensaje, player)
+            return;
+        }
     }
 
     // COMANDOS PARA ADMINISTRACIÓN
-    if (comando.substring(0,7) == `${prefix}ar add`) {
-        mensaje.reply({
-            content: "Añadir roles"
-        })
-        añadirRoles(mensaje);
-        return;
-    }
-    if (comando.substring(0,7) == `${prefix}ar rem`) {
-        mensaje.reply({
-            content: "Quitar roles"
-        })
-        quitarRoles(mensaje);
-        return;
-    }
+    if (comando.startsWith("a")) {
+        if (comando.substring(0,7) == `${prefix}ar add`) {
+            mensaje.reply({
+                content: "Añadir roles"
+            })
+            añadirRoles(mensaje);
+            return;
+        }
+        if (comando.substring(0,7) == `${prefix}ar rem`) {
+            mensaje.reply({
+                content: "Quitar roles"
+            })
+            quitarRoles(mensaje);
+            return;
+        }
 
-    if (comando.substring(0,7) == `${prefix}ac add`) {
-        mensaje.reply({
-            content: "Añadir canales"
-        })
-        añadirCanales(mensaje);
-        return;
-    }
+        if (comando.substring(0,7) == `${prefix}ac add`) {
+            mensaje.reply({
+                content: "Añadir canales"
+            })
+            añadirCanales(mensaje);
+            return;
+        }
 
-    if (comando.substring(0,7) == `${prefix}ac rem`) {
-        mensaje.reply({
-            content: "Eliminar canales"
-        })
-        quitarCanales(mensaje);
-        return;
+        if (comando.substring(0,7) == `${prefix}ac rem`) {
+            mensaje.reply({
+                content: "Eliminar canales"
+            })
+            quitarCanales(mensaje);
+            return;
+        }
     }
 }
 
