@@ -1,6 +1,7 @@
 module.exports={escribirAyuda};
 
 const { MessageEmbed } = require('discord.js');
+const { escribirMensajeError } = require('./mensajeError');
 
 function escribirAyuda(mensaje) {
     try{
@@ -8,6 +9,7 @@ function escribirAyuda(mensaje) {
         .setTitle("AYUDA")
         .setColor("#00ffc8")
         .setDescription("Estos son los comandos disponibles")
+        
         // MUSICA
         .addFields(
             { name: 'MUSICA',value: 'Comandos para la música' },
@@ -30,9 +32,6 @@ function escribirAyuda(mensaje) {
         )
         mensaje.reply({embeds: [ayuda]})
     }catch (error) {
-        mensaje.reply({
-            content: "Comando introducido incorrectamente, para saber como usarlo correctamente escriba !help" 
-        })
-        console.log(error);
+        escribirMensajeError(mensaje);
     }
 }

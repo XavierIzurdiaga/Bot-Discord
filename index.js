@@ -43,7 +43,6 @@ client.on('messageCreate', (mensaje) =>{
         if (!mensaje.author.bot && mensaje.content.startsWith(prefix)) {
             leerMensaje(mensaje);
         }
-        
     } catch (error) {
         console.log("Algo ha salido mal");
     }
@@ -62,58 +61,37 @@ function leerMensaje(mensaje) {
 
     // COMANDOS PARA CANCIONES
     if (comando.startsWith("!m")) {
-        if (comando.substring(0,3) == `${prefix}mp`) {
-            mensaje.reply({
-                content: "Añadir cancion"
-            })
+        if (comando.startsWith(`${prefix}mp`)) {
             añadirCancion(mensaje, canciones, player, conexion);
             return;
         }
 
-        if (comando == `${prefix}ms`) {
-            mensaje.reply({
-                content: "Saltar cancion"
-            })
+        if (comando.startsWith(`${prefix}ms`)) {
             saltarCancion(mensaje, canciones, player);
             return;
         }
 
-        if (comando.substring(0,3) == `${prefix}mr`) {
-            mensaje.reply({
-                content: "Quitar cancion"
-            })
+        if (comando.startsWith(`${prefix}mr`)) {
             quitarCancion(mensaje, canciones)
             return;
         }
         
         if (comando == `${prefix}mq`) {
-            mensaje.reply({
-                content: "Ver canciones"
-            })
             verCanciones(mensaje, canciones)
             return;
         }
         
         if (comando == `${prefix}md`) {
-            mensaje.reply({
-                content: "Desconectar"
-            })
             desconectar(mensaje, conexion)
             return;
         }
 
         if (comando == `${prefix}mf`) {
-            mensaje.reply({
-                content: "Parar"
-            })
             pararMusica(mensaje, player)
             return;
         }
 
         if (comando == `${prefix}mc`) {
-            mensaje.reply({
-                content: "Continuar"
-            })
             continuarMusica(mensaje, player)
             return;
         }
@@ -121,33 +99,21 @@ function leerMensaje(mensaje) {
 
     // COMANDOS PARA ADMINISTRACIÓN
     if (comando.startsWith("!a")) {
-        if (comando.substring(0,7) == `${prefix}ar add`) {
-            mensaje.reply({
-                content: "Añadir roles"
-            })
+        if (comando.startsWith(`${prefix}ar add`)) {
             añadirRoles(mensaje);
             return;
         }
-        if (comando.substring(0,7) == `${prefix}ar rem`) {
-            mensaje.reply({
-                content: "Quitar roles"
-            })
+        if (comando.startsWith(`${prefix}ar rem`)) {
             quitarRoles(mensaje);
             return;
         }
 
-        if (comando.substring(0,7) == `${prefix}ac add`) {
-            mensaje.reply({
-                content: "Añadir canales"
-            })
+        if (comando.startsWith(`${prefix}ac add`)) {
             añadirCanales(mensaje);
             return;
         }
 
-        if (comando.substring(0,7) == `${prefix}ac rem`) {
-            mensaje.reply({
-                content: "Eliminar canales"
-            })
+        if (comando.startsWith(`${prefix}ac rem`)) {
             quitarCanales(mensaje);
             return;
         }

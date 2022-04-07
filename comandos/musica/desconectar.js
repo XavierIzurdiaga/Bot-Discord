@@ -1,17 +1,17 @@
+const { escribirMensajeError } = require("../mensajeError");
+const { enviarMensaje } = require("../mensajeNormal");
+
 module.exports = {desconectar};
 
 function desconectar(mensaje, conexion) {
     try{
         if(conexion[0]){
             conexion[0].destroy();
+            enviarMensaje(mensaje, "Desconectar")
         }else{
-            mensaje.reply({
-                content: "No esta en ningun canal de voz" 
-            })
+            enviarMensaje(mensaje, "No esta en ningun canal de voz")
         }
     }catch (error) {
-        mensaje.reply({
-            content: "Comando introducido incorrectamente, para saber como usarlo correctamente escriba !help" 
-        })
+        escribirMensajeError(mensaje);
     }
 }

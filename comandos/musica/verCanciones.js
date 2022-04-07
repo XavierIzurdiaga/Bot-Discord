@@ -1,3 +1,6 @@
+const { escribirMensajeError } = require("../mensajeError");
+const { enviarMensaje } = require('../mensajeNormal');
+
 module.exports = {verCanciones};
 
 function verCanciones(mensaje, canciones) {
@@ -9,15 +12,11 @@ function verCanciones(mensaje, canciones) {
                 respuesta += '\n' + index + " - " + cancion.metadata.title;
                 index ++;
             });
-            mensaje.reply({
-                content: respuesta
-            })
+            enviarMensaje(mensaje, respuesta)
         }
 
     }catch (error) {
-        mensaje.reply({
-            content: "Comando introducido incorrectamente, para saber como usarlo correctamente escriba !help" 
-        })
+        escribirMensajeError(mensaje);
         console.log(error);
     }
 }
