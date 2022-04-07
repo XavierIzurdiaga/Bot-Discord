@@ -8,6 +8,8 @@ const {
 	createAudioResource,
 	joinVoiceChannel,
 } = require('@discordjs/voice');
+const { escribirMensajeError } = require('../mensajeError');
+const { enviarMensaje } = require('../mensajeNormal');
 
 async function añadirCancion(mensaje, canciones, player, conexion) {
     try {
@@ -28,9 +30,8 @@ async function añadirCancion(mensaje, canciones, player, conexion) {
                 url: InfoCancion.videoDetails.video_url,
             };
 
-        mensaje.reply({
-            content:`${cancion.title} Ha sido añadida a la lista`
-        })
+        let descripcion = `${cancion.title} Ha sido añadida a la lista`;
+        enviarMensaje(mensaje, descripcion)
 
         let stream = ytdl(cancion.url, { filter: 'audioonly' });
         let resource = createAudioResource(stream, { inputType: StreamType.Arbitrary,
@@ -52,8 +53,6 @@ async function añadirCancion(mensaje, canciones, player, conexion) {
         });
             
     }catch (error) {
-        mensaje.reply({
-            content: "Comando introducido incorrectamente, para saber como usarlo correctamente escriba !help" 
-        })
+        escribirMensajeError(mensaje);
     }
 }

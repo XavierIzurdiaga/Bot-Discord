@@ -1,11 +1,13 @@
+const { escribirMensajeError } = require("../mensajeError");
+const { enviarMensaje } = require("../mensajeNormal");
+
 module.exports = {continuarMusica};
 
 function continuarMusica(mensaje, player) {
     try{
         player.unpause();
+        enviarMensaje(mensaje, "Reproducción de música reanudada")
     }catch (error) {
-        mensaje.reply({
-            content: "Comando introducido incorrectamente, para saber como usarlo correctamente escriba !help" 
-        })
+        escribirMensajeError(mensaje);
     }
 }
