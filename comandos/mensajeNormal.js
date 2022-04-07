@@ -4,6 +4,7 @@ module.exports = {enviarMensaje};
 
 function enviarMensaje(mensaje, descripcion) {
     let error = new MessageEmbed()
+        .setColor("#00ffc8")
         .setDescription(descripcion)
-        mensaje.reply({embeds: [error]})
+        mensaje.channel.send({embeds: [error]})
 }
