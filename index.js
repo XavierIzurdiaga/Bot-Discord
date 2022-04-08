@@ -67,17 +67,17 @@ function leerMensaje(mensaje) {
         }
 
         if (comando.startsWith(`${prefix}ms`)) {
-            saltarCancion(mensaje, canciones, player);
+            saltarCancion(mensaje, canciones, player, conexion);
             return;
         }
 
         if (comando.startsWith(`${prefix}mr`)) {
-            quitarCancion(mensaje, canciones)
+            quitarCancion(mensaje, canciones, conexion)
             return;
         }
         
         if (comando == `${prefix}mq`) {
-            verCanciones(mensaje, canciones)
+            verCanciones(mensaje, canciones, conexion)
             return;
         }
         
@@ -87,12 +87,12 @@ function leerMensaje(mensaje) {
         }
 
         if (comando == `${prefix}mf`) {
-            pararMusica(mensaje, player)
+            pararMusica(mensaje, player, conexion)
             return;
         }
 
-        if (comando == `${prefix}mc`) {
-            continuarMusica(mensaje, player)
+        if (comando == `${prefix}mc`, conexion) {
+            continuarMusica(mensaje, player, conexion)
             return;
         }
     }

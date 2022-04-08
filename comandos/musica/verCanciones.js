@@ -3,8 +3,12 @@ const { enviarMensaje } = require('../mensajeNormal');
 
 module.exports = {verCanciones};
 
-function verCanciones(mensaje, canciones) {
+function verCanciones(mensaje, canciones, conexion) {
     try {
+        if(!conexion[0]){
+            enviarMensaje(mensaje, "Debo estar en un canal de voz para ver las canciones")
+            return;
+        }
         if (canciones.length >= 1) {
             let respuesta = "Canciones en la lista:";
             let index = 0
