@@ -9,7 +9,7 @@ function desconectar(mensaje, conexion) {
             conexion[0].destroy();
             enviarMensaje(mensaje, "Desconectar")
         }else{
-            enviarMensaje(mensaje, "No esta en ningun canal de voz")
+            enviarMensaje(mensaje, "No estoy en ningun canal de voz")
         }
     }catch (error) {
         escribirMensajeError(mensaje);
