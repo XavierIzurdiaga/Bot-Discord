@@ -67,6 +67,5 @@ async function añadirCancion(mensaje, canciones, player, conexion) {
             
     }catch (error) {
         escribirMensajeError(mensaje);
-        console.log(error);
     }
 }

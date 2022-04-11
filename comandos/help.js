@@ -15,6 +15,7 @@ function escribirAyuda(mensaje) {
             { name: 'MUSICA',value: 'Comandos para la música' },
             { name: 'Añadir cancion', value: '!mp (URL)', inline: true },
             { name: 'Ver lista', value: '!mq', inline: true },
+            { name: 'Mezclar lista', value: '!mm', inline: true },
             { name: 'Quitar cancion', value: '!mr (num)', inline: true },
             { name: 'Saltar cancion', value: '!ms', inline: true },
             { name: 'Parar música', value: '!mf', inline: true },
