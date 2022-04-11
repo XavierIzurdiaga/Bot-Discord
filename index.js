@@ -18,6 +18,7 @@ const { desconectar } = require('./comandos/musica/desconectar');
 const { pararMusica } = require('./comandos/musica/pararMusica');
 const { continuarMusica } = require('./comandos/musica/continuarMusica');
 const { escribirAyuda } = require('./comandos/help');
+const { mezclarLista } = require('./comandos/musica/mezclarLista');
 
 const client = new Client({
     intents:[
@@ -77,6 +78,11 @@ function leerMensaje(mensaje) {
         
         if (comando == `${prefix}mq`) {
             verCanciones(mensaje, canciones, conexion)
+            return;
+        }
+
+        if (comando == `${prefix}mm`) {
+            mezclarLista(mensaje, canciones, conexion)
             return;
         }
         
