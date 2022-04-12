@@ -14,10 +14,11 @@ function escribirAyuda(mensaje) {
         .addFields(
             { name: 'MUSICA',value: 'Comandos para la música' },
             { name: 'Añadir cancion', value: '!mp (URL)', inline: true },
+            { name: 'Saltar cancion', value: '!ms', inline: true },
+            { name: 'Quitar cancion', value: '!mr (num)', inline: true },
             { name: 'Ver lista', value: '!mq', inline: true },
             { name: 'Mezclar lista', value: '!mm', inline: true },
-            { name: 'Quitar cancion', value: '!mr (num)', inline: true },
-            { name: 'Saltar cancion', value: '!ms', inline: true },
+            { name: 'Limpiar lista', value: '!ml', inline: true },
             { name: 'Parar música', value: '!mf', inline: true },
             { name: 'Reanudar música', value: '!mc', inline: true },
             { name: 'Desconectar bot', value: '!md', inline: true },

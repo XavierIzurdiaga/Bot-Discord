@@ -19,6 +19,7 @@ const { pararMusica } = require('./comandos/musica/pararMusica');
 const { continuarMusica } = require('./comandos/musica/continuarMusica');
 const { escribirAyuda } = require('./comandos/help');
 const { mezclarLista } = require('./comandos/musica/mezclarLista');
+const { limpiarLista } = require('./comandos/musica/limpiarLista');
 
 const client = new Client({
     intents:[
@@ -85,6 +86,11 @@ function leerMensaje(mensaje) {
             mezclarLista(mensaje, canciones, conexion)
             return;
         }
+
+        if (comando == `${prefix}ml`) {
+            limpiarLista(mensaje, canciones, conexion, player)
+            return;
+        }
         
         if (comando == `${prefix}md`) {
             desconectar(mensaje, conexion)
@@ -92,12 +98,12 @@ function leerMensaje(mensaje) {
         }
 
         if (comando == `${prefix}mf`) {
-            pararMusica(mensaje, player, conexion)
+            pararMusica(mensaje, player, conexion, canciones)
             return;
         }
 
-        if (comando == `${prefix}mc`, conexion) {
-            continuarMusica(mensaje, player, conexion)
+        if (comando == `${prefix}mc`) {
+            continuarMusica(mensaje, player, conexion, canciones)
             return;
         }
     }
