@@ -13,7 +13,7 @@ function escribirAyuda(mensaje) {
         // MUSICA
         .addFields(
             { name: 'MUSICA',value: 'Comandos para la música' },
-            { name: 'Añadir cancion', value: '!mp (URL)', inline: true },
+            { name: 'Añadir cancion', value: '!mp (URL/Titulo)', inline: true },
             { name: 'Saltar cancion', value: '!ms', inline: true },
             { name: 'Quitar cancion', value: '!mr (num)', inline: true },
             { name: 'Ver lista', value: '!mq', inline: true },

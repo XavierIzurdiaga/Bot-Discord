@@ -16,7 +16,6 @@ function limpiarLista(mensaje, canciones, conexion, player) {
 
         canciones.splice(0);
         player.stop()
-        // console.log(player.state.status == "playing");
         
         enviarMensaje(mensaje, "Lista de canciones limpia")
     }catch (error) {
