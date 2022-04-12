@@ -13,6 +13,25 @@ const { enviarMensaje } = require('../mensajeNormal');
 
 async function añadirCancion(mensaje, canciones, player, conexion) {
     try {
+        let canal = mensaje.member.voice.channel;
+        if (!canal) {
+            enviarMensaje(mensaje, "Debe de estar en un canal de voz para usar este comando")
+            return;
+        }
+        let comando = String(mensaje.content);
+        let info = comando.split("!mp")[1];
+        if (info.indexOf("youtub") >= 0) {
+            añadirCancionURL(mensaje, canciones, player, conexion);
+        }else{
+            añadirCancionTitulo(mensaje, canciones, player, conexion);
+        }
+    }catch (error) {
+        escribirMensajeError(mensaje);
+    }
+}
+
+async function añadirCancionURL(mensaje, canciones, player, conexion) {
+    try {
         let comando = String(mensaje.content);
         let UrlCancion = comando.split(" ")[1];
 
@@ -47,6 +66,67 @@ async function añadirCancion(mensaje, canciones, player, conexion) {
             }
         })
         
+        canciones.push(resource);
+
+        player.play(canciones[0]);
+        conexion[0].subscribe(player);
+
+        player.on(AudioPlayerStatus.Idle, () => {
+            if(canciones.length > 0){
+                if(canciones[0].ended){
+                    saltarCancion(mensaje, canciones, player, conexion);
+                }
+            }
+        });
+
+        player.on('error', error => {
+            console.log(`Error: ${error.message} with resource ${error.resource.metadata.title}`);
+            saltarCancion(mensaje, canciones, player, conexion);
+        });
+            
+    }catch (error) {
+        escribirMensajeError(mensaje);
+    }
+}
+
+async function añadirCancionTitulo(mensaje, canciones, player, conexion) {
+    try {
+        let comando = String(mensaje.content);
+        let tituloCancion = comando.split("!mp ")[1];
+
+        let canal = mensaje.member.voice.channel;
+        if (!canal) {
+            enviarMensaje(mensaje, "Debe de estar en un canal de voz para usar este comando")
+            return;
+        }
+
+        conexion[0] = joinVoiceChannel({
+            channelId: canal.id,
+            guildId: mensaje.guild.id,
+            adapterCreator: mensaje.guild.voiceAdapterCreator,
+        });
+
+        let yt_info = await youS.search(tituloCancion, {
+            limit: 1
+        })
+
+        let cancion = {
+                title: yt_info[0].title,
+                url: yt_info[0].url,
+            };
+
+        let descripcion = `${cancion.title} Ha sido añadida a la lista`;
+        enviarMensaje(mensaje, descripcion)
+
+        let stream = await youS.stream(yt_info[0].url)
+
+        let resource = createAudioResource(stream.stream, {
+            inputType: stream.type,
+            metadata: {
+                title : cancion.title
+            }
+        })
+
         canciones.push(resource);
 
         player.play(canciones[0]);

@@ -3,6 +3,7 @@ const prefix = process.env.prefix;
 const {createAudioPlayer} = require('@discordjs/voice');
 
 //COMANDOS
+const { escribirAyuda } = require('./comandos/help');
 // ROLES
 const { añadirRoles } = require('./comandos/roles/añadirRoles');
 const { quitarRoles } = require('./comandos/roles/quitarRoles');
@@ -17,7 +18,6 @@ const { verCanciones } = require('./comandos/musica/verCanciones');
 const { desconectar } = require('./comandos/musica/desconectar');
 const { pararMusica } = require('./comandos/musica/pararMusica');
 const { continuarMusica } = require('./comandos/musica/continuarMusica');
-const { escribirAyuda } = require('./comandos/help');
 const { mezclarLista } = require('./comandos/musica/mezclarLista');
 const { limpiarLista } = require('./comandos/musica/limpiarLista');
 
