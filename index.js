@@ -94,7 +94,7 @@ function leerMensaje(mensaje) {
         }
         
         if (comando == `${prefix}md`) {
-            desconectar(mensaje, conexion)
+            desconectar(mensaje, conexion, canciones)
             return;
         }
 
