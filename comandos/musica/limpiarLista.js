@@ -19,7 +19,6 @@ function limpiarLista(mensaje, canciones, conexion, player) {
         
         enviarMensaje(mensaje, "Lista de canciones limpia")
     }catch (error) {
-        console.log(error);
         escribirMensajeError(mensaje);
     }
 }

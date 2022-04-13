@@ -25,6 +25,5 @@ function verCanciones(mensaje, canciones, conexion) {
 
     }catch (error) {
         escribirMensajeError(mensaje);
-        console.log(error);
     }
 }

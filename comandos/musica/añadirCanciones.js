@@ -94,7 +94,6 @@ async function añadirCancionURL(mensaje, canciones, player, conexion) {
         });
             
     }catch (error) {
-        console.log(error);
         escribirMensajeError(mensaje);
     }
 }

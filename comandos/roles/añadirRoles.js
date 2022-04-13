@@ -26,7 +26,6 @@ function añadirRoles(mensaje) {
             throw ("Error");
         }
     } catch (error) {
-        console.log(error);
         escribirMensajeError(mensaje);
     }
 }

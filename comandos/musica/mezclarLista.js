@@ -25,7 +25,6 @@ function mezclarLista(mensaje, canciones, conexion) {
 
         enviarMensaje(mensaje, "Lista de canciones mezclada");
     }catch (error) {
-        console.log(error);
         escribirMensajeError(mensaje);
     }
 }
