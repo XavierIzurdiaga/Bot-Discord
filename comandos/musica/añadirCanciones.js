@@ -18,6 +18,7 @@ async function añadirCancion(mensaje, canciones, player, conexion) {
             enviarMensaje(mensaje, "Debe de estar en un canal de voz para usar este comando")
             return;
         }
+
         let comando = String(mensaje.content);
         let info = comando.split("!mp")[1];
         if (info.indexOf("youtub") >= 0) {
@@ -41,13 +42,21 @@ async function añadirCancionURL(mensaje, canciones, player, conexion) {
             return;
         }
 
+        let InfoCancion;
+
+        try {
+            InfoCancion = await ytdl.getInfo(UrlCancion);
+        } catch (error) {
+            enviarMensaje(mensaje, "No se ha encontrado ninguna cancion con esa URL");
+            return;
+        }
+
         conexion[0] = joinVoiceChannel({
             channelId: canal.id,
             guildId: mensaje.guild.id,
             adapterCreator: mensaje.guild.voiceAdapterCreator,
         });
 
-        let InfoCancion = await ytdl.getInfo(UrlCancion);
         let cancion = {
                 title: InfoCancion.videoDetails.title,
                 url: InfoCancion.videoDetails.video_url,
@@ -85,6 +94,7 @@ async function añadirCancionURL(mensaje, canciones, player, conexion) {
         });
             
     }catch (error) {
+        console.log(error);
         escribirMensajeError(mensaje);
     }
 }
@@ -100,15 +110,20 @@ async function añadirCancionTitulo(mensaje, canciones, player, conexion) {
             return;
         }
 
+        let yt_info = await youS.search(tituloCancion, {
+            limit: 1
+        })
+
+        if (!yt_info[0]) {
+            enviarMensaje(mensaje, "No se ha encontrado ninguna cancion con ese titulo");
+            return;
+        }
+        
         conexion[0] = joinVoiceChannel({
             channelId: canal.id,
             guildId: mensaje.guild.id,
             adapterCreator: mensaje.guild.voiceAdapterCreator,
         });
-
-        let yt_info = await youS.search(tituloCancion, {
-            limit: 1
-        })
 
         let cancion = {
                 title: yt_info[0].title,
