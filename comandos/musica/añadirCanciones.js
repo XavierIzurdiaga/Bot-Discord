@@ -9,13 +9,13 @@ const {
 	joinVoiceChannel,
 } = require('@discordjs/voice');
 const { escribirMensajeError } = require('../mensajeError');
-const { enviarMensaje } = require('../mensajeNormal');
+const { enviarMensaje } = require('../mensajePersonalizado');
 
 async function añadirCancion(mensaje, canciones, player, conexion) {
     try {
         let canal = mensaje.member.voice.channel;
         if (!canal) {
-            enviarMensaje(mensaje, "Debe de estar en un canal de voz para usar este comando")
+            enviarMensaje(mensaje, "Debe de estar en un canal de voz para usar este comando", "error")
             return;
         }
 
@@ -38,7 +38,7 @@ async function añadirCancionURL(mensaje, canciones, player, conexion) {
 
         let canal = mensaje.member.voice.channel;
         if (!canal) {
-            enviarMensaje(mensaje, "Debe de estar en un canal de voz para usar este comando")
+            enviarMensaje(mensaje, "Debe de estar en un canal de voz para usar este comando", "error")
             return;
         }
 
@@ -47,7 +47,7 @@ async function añadirCancionURL(mensaje, canciones, player, conexion) {
         try {
             InfoCancion = await ytdl.getInfo(UrlCancion);
         } catch (error) {
-            enviarMensaje(mensaje, "No se ha encontrado ninguna cancion con esa URL");
+            enviarMensaje(mensaje, "No se ha encontrado ninguna cancion con esa URL", "error");
             return;
         }
 
@@ -63,7 +63,7 @@ async function añadirCancionURL(mensaje, canciones, player, conexion) {
             };
 
         let descripcion = `${cancion.title} Ha sido añadida a la lista`;
-        enviarMensaje(mensaje, descripcion)
+        enviarMensaje(mensaje, descripcion, "bien")
 
 
         let stream = await youS.stream(UrlCancion)
@@ -94,7 +94,6 @@ async function añadirCancionURL(mensaje, canciones, player, conexion) {
         });
             
     }catch (error) {
-        console.log(error);
         escribirMensajeError(mensaje);
     }
 }
@@ -106,7 +105,7 @@ async function añadirCancionTitulo(mensaje, canciones, player, conexion) {
 
         let canal = mensaje.member.voice.channel;
         if (!canal) {
-            enviarMensaje(mensaje, "Debe de estar en un canal de voz para usar este comando")
+            enviarMensaje(mensaje, "Debe de estar en un canal de voz para usar este comando", "error")
             return;
         }
 
@@ -115,7 +114,7 @@ async function añadirCancionTitulo(mensaje, canciones, player, conexion) {
         })
 
         if (!yt_info[0]) {
-            enviarMensaje(mensaje, "No se ha encontrado ninguna cancion con ese titulo");
+            enviarMensaje(mensaje, "No se ha encontrado ninguna cancion con ese titulo", "error");
             return;
         }
         
@@ -131,7 +130,7 @@ async function añadirCancionTitulo(mensaje, canciones, player, conexion) {
             };
 
         let descripcion = `${cancion.title} Ha sido añadida a la lista`;
-        enviarMensaje(mensaje, descripcion)
+        enviarMensaje(mensaje, descripcion, "bien")
 
         let stream = await youS.stream(yt_info[0].url)
 
