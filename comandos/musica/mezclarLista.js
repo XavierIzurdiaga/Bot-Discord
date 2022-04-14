@@ -1,15 +1,15 @@
 module.exports = {mezclarLista};
 const { escribirMensajeError } = require('../mensajeError');
-const { enviarMensaje } = require('../mensajeNormal');
+const { enviarMensaje } = require('../mensajePersonalizado');
 
 function mezclarLista(mensaje, canciones, conexion) {
     try{
         if(!conexion[0]){
-            enviarMensaje(mensaje, "Debo estar en un canal de voz para mezclar la lista")
+            enviarMensaje(mensaje, "Debo estar en un canal de voz para mezclar la lista", "error")
             return;
         }
         if(canciones.length <= 2){
-            enviarMensaje(mensaje, "Debo de haber mas de canciones para mezclar la lista")
+            enviarMensaje(mensaje, "Debo de haber mas de 2 canciones para mezclar la lista", "error")
             return;
         }
 
@@ -23,7 +23,7 @@ function mezclarLista(mensaje, canciones, conexion) {
             copiaCanciones.splice(random, 1);
         }       
 
-        enviarMensaje(mensaje, "Lista de canciones mezclada");
+        enviarMensaje(mensaje, "Lista de canciones mezclada", "bien");
     }catch (error) {
         escribirMensajeError(mensaje);
     }

@@ -1,12 +1,12 @@
 const { escribirMensajeError } = require("../mensajeError");
-const { enviarMensaje } = require("../mensajeNormal");
+const { enviarMensaje } = require("../mensajePersonalizado");
 
 module.exports = {quitarCancion};
 
 function quitarCancion(mensaje, canciones, conexion) {
     try {
         if(!conexion[0]){
-            enviarMensaje(mensaje, "Debo estar en un canal de voz quitar la cancion")
+            enviarMensaje(mensaje, "Debo estar en un canal de voz quitar la cancion", "error")
             return;
         }
         let comando = String(mensaje.content);
@@ -15,7 +15,7 @@ function quitarCancion(mensaje, canciones, conexion) {
             let cancion = canciones[nCancion]
             canciones.splice(nCancion, 1);
             let descripcion = `${cancion.metadata.title} Ha sido eliminada a la lista`
-            enviarMensaje(mensaje, descripcion)
+            enviarMensaje(mensaje, descripcion, "bien")
             return;
         }
         throw "Error";

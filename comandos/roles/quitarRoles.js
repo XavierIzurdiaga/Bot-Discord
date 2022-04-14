@@ -1,6 +1,6 @@
 const { Permissions } = require("discord.js");
 const { escribirMensajeError } = require("../mensajeError");
-const { enviarMensaje } = require("../mensajeNormal");
+const { enviarMensaje } = require("../mensajePersonalizado");
 
 module.exports = {quitarRoles};
 
@@ -8,7 +8,7 @@ function quitarRoles(mensaje) {
     try {
         let mod = mensaje.guild.roles.cache.find(role => role.name === "MOD");
         if (!mensaje.member.roles.cache.has(mod.id) && !mensaje.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
-            enviarMensaje(mensaje, "No tienes los roles necesarios para ejectuar este comando")
+            enviarMensaje(mensaje, "No tienes los roles necesarios para ejectuar este comando", "error")
             return
         }
         let comando = String(mensaje.content);
@@ -18,9 +18,9 @@ function quitarRoles(mensaje) {
             let miembro = mensaje.mentions.members.first();
             if (miembro.roles.cache.has(rol.id)) {
                 miembro.roles.remove(rol).catch(console.error);
-                enviarMensaje(mensaje, "Rol eliminado correctamente")
+                enviarMensaje(mensaje, "Rol eliminado correctamente", "bien")
             }else{
-                enviarMensaje(mensaje, "Este usuario no tiene este rol")
+                enviarMensaje(mensaje, "Este usuario no tiene este rol", "error")
             }
         }else{
             throw ("Error");
