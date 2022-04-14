@@ -5,7 +5,7 @@ module.exports = {enviarMensaje};
 function enviarMensaje(mensaje, descripcion, tipo) {
     let mensajePersonalizado = new MessageEmbed()
     if (tipo == "error") {
-        mensajePersonalizado.setColor("#7D7DFA")
+        mensajePersonalizado.setColor("#3232FF")
     }
     if (tipo == "bien") {
         mensajePersonalizado.setColor("#00FFC8")
