@@ -4,6 +4,8 @@ const { enviarMensaje } = require("../mensajePersonalizado");
 
 module.exports = {añadirCanales};
 
+// FUNCION QUE AÑADE UN CANAL DE TEXTO O VOZ EN CASO DE QUE EL USUARIO 
+// QUE HA EJECUTADO EL COMANDO SEA ADMINSITRADOR O POSEA EL ROL DE "MOD"
 function añadirCanales(mensaje){
     try {
         let mod = mensaje.guild.roles.cache.find(role => role.name === "MOD");

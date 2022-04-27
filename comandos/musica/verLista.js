@@ -3,6 +3,7 @@ const { enviarMensaje } = require('../mensajePersonalizado');
 
 module.exports = {verCanciones};
 
+// FUNCION PARA VER TODAS LAS CANCIONES QUE HAY EN LA LISTA
 function verCanciones(mensaje, canciones, conexion) {
     try {
         if(!conexion[0]){

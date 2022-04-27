@@ -2,6 +2,7 @@ module.exports = {mezclarLista};
 const { escribirMensajeError } = require('../mensajeError');
 const { enviarMensaje } = require('../mensajePersonalizado');
 
+// FUNCION PARA MEZCLAR LA LISTA DE CANCIONES
 function mezclarLista(mensaje, canciones, conexion) {
     try{
         if(!conexion[0]){

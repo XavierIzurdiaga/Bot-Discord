@@ -11,10 +11,10 @@ const { quitarRoles } = require('./comandos/roles/quitarRoles');
 const { añadirCanales } = require('./comandos/canales/añadirCanales');
 const { quitarCanales } = require('./comandos/canales/quitarCanales');
 //MUSICA
-const { añadirCancion } = require('./comandos/musica/añadirCanciones');
+const { añadirCancion } = require('./comandos/musica/añadirCancion');
 const { saltarCancion } = require('./comandos/musica/saltarCancion');
 const { quitarCancion } = require('./comandos/musica/quitarCancion');
-const { verCanciones } = require('./comandos/musica/verCanciones');
+const { verCanciones } = require('./comandos/musica/verLista');
 const { desconectar } = require('./comandos/musica/desconectar');
 const { pararMusica } = require('./comandos/musica/pararMusica');
 const { continuarMusica } = require('./comandos/musica/continuarMusica');
@@ -35,10 +35,14 @@ var canciones = [];
 var conexion = [];
 const player = createAudioPlayer();
 
+// CUANDO EL BOT SE HA INICIADO CORRECTAMENTE LO MUESTRA CON UN LOG
 client.on('ready', () => {
     console.log('El bot esta listo');
 })
 
+// CUANDO SE ENVIA UN MENSAJE EN EL QUE ESTA EL BOT ESTE LO ANALIZARA 
+// Y COMPROBARÁ QUE ESTE EMPIEZA POR LE PREFIJO Y QUE NO HA SIDO UN BOT EL QUE LO HA MANDADO
+// DE ESTA FORMA AHORRAMOS RECURSOS EN NO ANALIZAR MENSAJES QUE NO SEAN PARA EL BOT
 client.on('messageCreate', (mensaje) =>{
     try {
         if (!mensaje.author.bot && mensaje.content.startsWith(prefix)) {
@@ -49,11 +53,11 @@ client.on('messageCreate', (mensaje) =>{
     }
 })
 
+// ESTA FUNCION SE ENCARGA DE ANALIZAR EL MENSAJE Y VER CUAL ES EL COMANDO SE QUIERE EJECUTAR
 function leerMensaje(mensaje) {
     let comando = String(mensaje.content);
 
     // COMANDO PARA MOSTRAR LA AYUDA
-
     if (comando == `${prefix}help`) {
         //ACTUALIZAR
         escribirAyuda(mensaje);
@@ -61,7 +65,7 @@ function leerMensaje(mensaje) {
     }
 
     // COMANDOS PARA CANCIONES
-    if (comando.startsWith("!m")) {
+    if (comando.startsWith(`${prefix}m`)) {
         if (comando.startsWith(`${prefix}mp`)) {
             añadirCancion(mensaje, canciones, player, conexion);
             return;
@@ -109,7 +113,7 @@ function leerMensaje(mensaje) {
     }
 
     // COMANDOS PARA ADMINISTRACIÓN
-    if (comando.startsWith("!a")) {
+    if (comando.startsWith(`${prefix}a`)) {
         if (comando.startsWith(`${prefix}ar add`)) {
             añadirRoles(mensaje);
             return;

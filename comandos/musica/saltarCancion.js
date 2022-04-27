@@ -3,6 +3,7 @@ const { enviarMensaje } = require("../mensajePersonalizado");
 
 module.exports = {saltarCancion};
 
+// FUNCION PARA QUITAR LA CANCION ACTUAL
 function saltarCancion(mensaje, canciones, player, conexion) {
     try{
         if(!conexion[0]){

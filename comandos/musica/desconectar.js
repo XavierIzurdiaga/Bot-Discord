@@ -3,6 +3,8 @@ const { enviarMensaje } = require("../mensajePersonalizado");
 
 module.exports = {desconectar};
 
+// FUNCION QUE DESCONECTA AL BOT EN CASO 
+// DE ESTAR CONECTAOD EN UN CANAL DE VOZ
 function desconectar(mensaje, conexion, canciones) {
     try{
         if(conexion[0]){

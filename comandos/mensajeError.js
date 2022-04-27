@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports={escribirMensajeError};
 
+// FUNCION PARA MANDAR UN MENSAJE DE ERROR
 function escribirMensajeError(mensaje){
     try{
         let error = new MessageEmbed()

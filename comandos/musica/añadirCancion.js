@@ -11,6 +11,8 @@ const {
 const { escribirMensajeError } = require('../mensajeError');
 const { enviarMensaje } = require('../mensajePersonalizado');
 
+// FUNCION QUE ANALIZA UN MENSAJE EN BUSCA DE 
+// UNA URL DE YOUTUBE O UNA BUSQUEDA EN YOUTUBE
 async function añadirCancion(mensaje, canciones, player, conexion) {
     try {
         let canal = mensaje.member.voice.channel;

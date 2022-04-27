@@ -3,6 +3,7 @@ const { enviarMensaje } = require("../mensajePersonalizado");
 
 module.exports = {limpiarLista};
 
+// FUNCION PARA LIMPIAR LA LISTA DE CANCIONES
 function limpiarLista(mensaje, canciones, conexion, player) {
     try{
         if(!conexion[0]){
