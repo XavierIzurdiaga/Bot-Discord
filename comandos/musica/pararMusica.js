@@ -3,6 +3,7 @@ const { enviarMensaje } = require("../mensajePersonalizado");
 
 module.exports = {pararMusica};
 
+// FUNCION PARA PAUSAR LA REPRODUCCION DEL MUSICA DEL BOT
 function pararMusica(mensaje, player, conexion, canciones) {
     try{
         if(!conexion[0]){

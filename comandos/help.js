@@ -3,6 +3,7 @@ module.exports={escribirAyuda};
 const { MessageEmbed } = require('discord.js');
 const { escribirMensajeError } = require('./mensajeError');
 
+// FUNCION PARA ESCRBIR UN MENSAJE DE TODOS LOS COMANDOS DISPOIBLES DEL BOT
 function escribirAyuda(mensaje) {
     try{
         let ayuda = new MessageEmbed()

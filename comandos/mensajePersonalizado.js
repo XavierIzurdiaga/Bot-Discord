@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {enviarMensaje};
 
+// FUNCION PARA ENVIAR UN MENSAJE PERSONALIZADO
 function enviarMensaje(mensaje, descripcion, tipo) {
     let mensajePersonalizado = new MessageEmbed()
     if (tipo == "error") {

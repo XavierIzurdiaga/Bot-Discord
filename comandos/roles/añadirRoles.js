@@ -4,6 +4,8 @@ const { enviarMensaje } = require("../mensajePersonalizado");
 
 module.exports={añadirRoles};
 
+// FUNCION PARA AÑADIR ROLES A UN USUARIO EN CASO DE QUE EL USUARIO 
+// QUE HA EJECUTADO EL COMANDO SEA ADMINSITRADOR O POSEA EL ROL DE "MOD"
 function añadirRoles(mensaje) {
     try {
         let mod = mensaje.guild.roles.cache.find(role => role.name === "MOD");

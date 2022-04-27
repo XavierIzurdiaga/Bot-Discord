@@ -3,6 +3,7 @@ const { enviarMensaje } = require("../mensajePersonalizado");
 
 module.exports = {quitarCancion};
 
+// FUNCION PARA QUITAR UNA CANCION DE LA LISTA DE CANCIONES
 function quitarCancion(mensaje, canciones, conexion) {
     try {
         if(!conexion[0]){
