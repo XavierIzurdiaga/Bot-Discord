@@ -3,7 +3,7 @@ const { enviarMensaje } = require("../mensajePersonalizado");
 
 module.exports = {continuarMusica};
 
-// FUNCION QUE REAUNDA LA REPRODUCCION DEL MUSICA DEL BOT
+// FUNCION QUE REAUNDA LA REPRODUCCION DEL MÚSICA DEL BOT
 function continuarMusica(mensaje, player, conexion, canciones) {
     try{
         if(!conexion[0]){
