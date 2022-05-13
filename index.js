@@ -10,7 +10,7 @@ const { quitarRoles } = require('./comandos/roles/quitarRoles');
 // CANALES
 const { añadirCanales } = require('./comandos/canales/añadirCanales');
 const { quitarCanales } = require('./comandos/canales/quitarCanales');
-//MUSICA
+//MÚSICA
 const { añadirCancion } = require('./comandos/musica/añadirCancion');
 const { saltarCancion } = require('./comandos/musica/saltarCancion');
 const { quitarCancion } = require('./comandos/musica/quitarCancion');
@@ -30,7 +30,7 @@ const client = new Client({
     ]
 });
 
-// VARIABLES PARA MUSICA
+// VARIABLES PARA MÚSICA
 var canciones = [];
 var conexion = [];
 const player = createAudioPlayer();

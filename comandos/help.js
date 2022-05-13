@@ -11,7 +11,7 @@ function escribirAyuda(mensaje) {
         .setColor("#00ffc8")
         .setDescription("Estos son los comandos disponibles")
         
-        // MUSICA
+        // MÚSICA
         .addFields(
             { name: 'MUSICA',value: 'Comandos para la música' },
             { name: 'Añadir cancion', value: '!mp (URL/Titulo)', inline: true },
